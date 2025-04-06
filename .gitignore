@@ -37,3 +37,13 @@ next-env.d.ts
 .env.local
 backup.json
 backup.ndjson
+.vscode
+.next
+
+# Sanity
+/sanity/node_modules
+/sanity/dist
+
+# Logs
+logs
+*.log
