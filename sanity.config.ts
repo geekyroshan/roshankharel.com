@@ -11,17 +11,16 @@ import {table} from '@sanity/table'
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId} from './sanity/env'
-import {schema} from './sanity/schemaTypes'
 import {structure} from './sanity/structure'
-import {schemaTypes} from "./schemas"
+import {schemaTypes} from "./sanity/schemas"
 
 export default defineConfig({
   basePath: '/studio',
   projectId,
   dataset,
-  // Use combined schema types from both folders
+  // Use schemas from sanity/schemas folder
   schema: {
-    types: [...schema.types, ...schemaTypes],
+    types: schemaTypes,
   },
   plugins: [
     structureTool({structure}),

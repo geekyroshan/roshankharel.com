@@ -3,13 +3,17 @@ import type {StructureResolver} from 'sanity/structure'
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Blog')
+    .title('Content')
     .items([
-      S.documentTypeListItem('post').title('Posts'),
-      S.documentTypeListItem('category').title('Categories'),
-      S.documentTypeListItem('studioAuthor').title('Authors'),
+      S.documentTypeListItem('profile').title('Profile'),
+      S.documentTypeListItem('job').title('Jobs'),
+      S.documentTypeListItem('project').title('Projects'),
+      S.documentTypeListItem('Post').title('Blog Posts'),
+      S.documentTypeListItem('author').title('Author'),
+
       S.divider(),
+      // Show remaining document types that don't have custom structures
       ...S.documentTypeListItems().filter(
-        (item) => item.getId() && !['post', 'category', 'studioAuthor'].includes(item.getId()!),
+        (item) => item.getId() && !['profile', 'job', 'project', 'Post', 'author',].includes(item.getId()!),
       ),
     ])
