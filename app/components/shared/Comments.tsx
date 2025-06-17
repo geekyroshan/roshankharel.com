@@ -13,6 +13,15 @@ export default function Comments() {
       ? "transparent_dark"
       : "dark";
 
+  // Only render Giscus if the required variables are available
+  if (!giscusRepoId || !giscusCategoryId) {
+    return (
+      <div className="py-10 text-center text-zinc-500">
+        Comments are currently disabled.
+      </div>
+    );
+  }
+
   return (
     <Giscus
       id="comments"

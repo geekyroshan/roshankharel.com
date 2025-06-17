@@ -7,6 +7,7 @@ import { gitlabmono } from "./assets/font/font";
 import Navbar from "./components/global/Navbar";
 import Footer from "./components/global/Footer";
 import { Providers } from "./providers";
+import { umamiSiteId } from "@/lib/env.api";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -60,11 +61,14 @@ export default function RootLayout({
           <Footer />
         </Providers>
       </body>
-      <Script
-        defer
-        src="https://cloud.umami.is/script.js"
-        data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
-      />
+      {/* Only render Umami script if website ID is available */}
+      {umamiSiteId && (
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id={umamiSiteId}
+        />
+      )}
     </html>
   );
 }
