@@ -90,6 +90,18 @@ export type PostType = {
   isPublished: boolean;
 };
 
+export type PhotoType = {
+  _id: string;
+  title: string;
+  description?: string;
+  image: {
+    url: string;
+    lqip?: string;
+    aspectRatio?: number;
+    alt?: string;
+  };
+};
+
 export type HeroeType = {
   _id: string;
   _createdAt: string;

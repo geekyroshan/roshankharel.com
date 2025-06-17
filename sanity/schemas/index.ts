@@ -8,6 +8,7 @@ import { table } from "./table";
 import blockContent from "./blockContent";
 import quiz from "./quiz";
 import code from "./code";
+import photo from "./photo";
 
 export const schemaTypes = [
   profile,
@@ -15,6 +16,7 @@ export const schemaTypes = [
   project,
   post,
   author,
+  photo,
 
   // Reference types
   blockContent,

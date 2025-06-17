@@ -99,3 +99,17 @@ export const singlePostQuery = groq`*[_type == "Post" && slug.current == $slug][
   body,
 }`;
 
+export const photosQuery = groq`*[_type == "photo"] | order(order asc){
+  _id,
+  title,
+  description,
+  image {
+    "url": asset->url,
+    "lqip": asset->metadata.lqip,
+    "aspectRatio": asset->metadata.dimensions.aspectRatio,
+    alt
+  }
+}`;
+
+export const heroesQuery = groq`*[_type == "heroe"] | order(_createdAt asc) { _id, _createdAt, name, url, met }`;
+
