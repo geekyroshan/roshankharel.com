@@ -87,13 +87,6 @@ export const socialLinks = [
     status: "publication",
   },
   {
-    id: 11,
-    name: "Sanity",
-    url: "https://www.sanity.io/exchange/community/geekyroshan",
-    icon: FaHashtag,
-    status: "publication",
-  },
-  {
     id: 12,
     name: "Youtube",
     url: "https://youtube.com/@geekyroshan",

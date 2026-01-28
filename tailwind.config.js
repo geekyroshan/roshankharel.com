@@ -9,15 +9,17 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        incognito: ["var(--incognito)"],
-        inter: ["var(--inter)"],
+        incognito: ["var(--font-space-grotesk)"], // Alias for backward compatibility
+        sans: ["var(--font-dm-sans)"],
+        mono: ["var(--font-jetbrains-mono)"],
+        headline: ["var(--font-space-grotesk)"],
       },
       colors: {
-        "primary-color": "#33E092",
-        "secondary-color": "#0CCE6B",
-        "tertiary-color": "#16a34a",
-        "primary-bg": "rgba(39, 39, 43, 0.4)",
-        "secondary-bg": "rgba(250, 250, 250, 0.4)",
+        "primary-color": "#171717", // Neutral-900 (Blackish)
+        "secondary-color": "#525252", // Neutral-600
+        "tertiary-color": "#737373", // Neutral-500
+        "primary-bg": "#0a0a0a", // Neutral-950 (True Dark Gray/Black)
+        "secondary-bg": "#171717", // Neutral-900
       },
       boxShadow: {
         "line-light": "rgba(17, 17, 26, 0.1) 0px 1px 0px",

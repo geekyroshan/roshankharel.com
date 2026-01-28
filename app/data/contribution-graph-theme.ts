@@ -5,5 +5,5 @@ export const espionage: any = {
 
 export const github: any = {
   light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
-  dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
+  dark: ["#161b22", "#164e63", "#0891b2", "#06b6d4", "#67e8f9"],
 };

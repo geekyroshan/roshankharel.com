@@ -1,75 +1,66 @@
-import Image from "next/legacy/image";
 import Link from "next/link";
-import { postsQuery } from "@/lib/sanity.query";
-import { PostType } from "@/types";
-import EmptyState from "../shared/EmptyState";
-import { BiSolidTime, BiTime } from "react-icons/bi";
+import { posts } from "@/app/data/posts";
 import { formatDate } from "../../utils/date";
 import { HiCalendar } from "react-icons/hi";
-import { sanityFetch } from "@/lib/sanity.client";
-import { readTime } from "@/app/utils/readTime";
-import { toPlainText } from "@portabletext/react";
+import EmptyState from "../shared/EmptyState";
 
-const fallbackImage: string =
-  "https://res.cloudinary.com/roshankharel/image/upload/v1692608339/roshankharel/blog.png";
-
-export default async function Posts() {
-  const posts: PostType[] = await sanityFetch({
-    query: postsQuery,
-    tags: ["Post"],
-  });
+export default function Posts() {
+  const publishedPosts = posts.filter(post => post.isPublished);
 
   return (
     <section>
-      {posts.length > 0 ? (
+      {publishedPosts.length > 0 ? (
         <div className="flex flex-col lg:max-w-[950px] max-w-full lg:gap-y-8 gap-y-12 mb-12">
-          {posts.map((post) =>
-            post.isPublished !== true ? null : (
-              <article key={post._id}>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="flex lg:flex-row flex-col lg:items-center items-start gap-8 dark:bg-primary-bg bg-secondary-bg p-6 rounded-lg border dark:border-zinc-800 border-zinc-200 group"
-                >
-                  <div className="relative lg:w-[450px] lg:h-52 w-full h-56 overflow-clip">
-                    <Image
-                      src={post.coverImage?.image || fallbackImage}
-                      className="dark:bg-zinc-800 bg-zinc-100 rounded-md object-cover group-hover:scale-125 duration-300"
-                      alt={post.coverImage?.alt || post.title}
-                      layout="fill"
-                      placeholder={post.coverImage ? "blur" : "empty"}
-                      blurDataURL={post.coverImage?.lqip || ""}
+          {publishedPosts.map((post) => (
+            <article key={post._id}>
+              <Link
+                href={`/blog/${post.slug}`}
+                className="flex lg:flex-row flex-col lg:items-center items-start gap-8 dark:bg-zinc-900 bg-zinc-50 p-6 rounded-2xl border dark:border-zinc-800 border-zinc-100 group hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+              >
+                <div className="relative lg:w-[300px] lg:h-40 w-full h-48 overflow-hidden rounded-xl bg-zinc-200 dark:bg-zinc-800">
+                  {post.coverImage?.image ? (
+                    <div
+                      className="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
+                      style={{ backgroundImage: `url(${post.coverImage.image})` }}
                     />
-                  </div>
-                  <div className="max-w-lg">
-                    <h2 className="max-w-sm text-2xl font-semibold tracking-tight mb-4">
-                      {post.title}
-                    </h2>
-                    <p className="dark:text-zinc-400 text-zinc-600 text-[0.95rem]">
-                      {post.description}
-                    </p>
-                    <div className="flex items-center gap-x-4 mt-3 text-sm">
-                      <div className="flex items-center gap-x-2">
-                        <HiCalendar />
-                        <time
-                          dateTime={post.date ? post.date : post._createdAt}
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-4xl">
+                      📝
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex-1">
+                  <h2 className="text-2xl font-bold font-headline tracking-tight mb-3 group-hover:text-black dark:group-hover:text-white transition-colors">
+                    {post.title}
+                  </h2>
+                  <p className="dark:text-zinc-400 text-zinc-600 text-[0.95rem] line-clamp-2">
+                    {post.description}
+                  </p>
+
+                  <div className="flex items-center flex-wrap gap-4 mt-4">
+                    <div className="flex items-center gap-x-2 text-sm text-zinc-500">
+                      <HiCalendar />
+                      <time dateTime={post._createdAt}>
+                        {formatDate(post._createdAt)}
+                      </time>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      {post.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs px-2 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
                         >
-                          {post.date
-                            ? formatDate(post.date)
-                            : formatDate(post._createdAt)}
-                        </time>
-                      </div>
-                      <div className="flex items-center gap-x-2">
-                        <BiSolidTime />
-                        <div className="">
-                          {readTime(toPlainText(post.body))}
-                        </div>
-                      </div>
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                </Link>
-              </article>
-            )
-          )}
+                </div>
+              </Link>
+            </article>
+          ))}
         </div>
       ) : (
         <EmptyState value="Blog Post" />

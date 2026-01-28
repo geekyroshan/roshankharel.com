@@ -1,15 +1,13 @@
 import Image from "next/image";
 import { Metadata } from "next";
-import { profileQuery } from "@/lib/sanity.query";
-import type { ProfileType } from "@/types";
 import { PortableText } from "@portabletext/react";
 import { BiEnvelope, BiLinkExternal, BiSolidDownload } from "react-icons/bi";
 import { CustomPortableText } from "../components/shared/CustomPortableText";
 
 import Usage from "../components/pages/Usage";
 import { Slide } from "../animation/Slide";
-import { sanityFetch } from "@/lib/sanity.client";
 import RefLink from "../components/shared/RefLink";
+import { profile } from "@/app/data/portfolio";
 
 export const metadata: Metadata = {
   title: "About | Roshan Kharel",
@@ -26,24 +24,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function About() {
-  const profile: ProfileType = await sanityFetch({
-    query: profileQuery,
-    tags: ["profile"],
-  });
+export default function About() {
 
   return (
     <main className="relative mx-auto max-w-3xl md:px-16 px-6 lg:max-w-7xl">
       <div key={profile?._id}>
-        <section className="relative grid lg:grid-cols-custom grid-cols-1 gap-x-6 justify-items-center mb-20">
+        <section className="relative grid lg:grid-cols-custom grid-cols-1 gap-x-12 justify-items-start mb-24">
           <div className="order-2 lg:order-none">
             <Slide>
-              <h1 className="font-incognito font-semibold tracking-tight sm:text-5xl text-3xl lg:leading-tight basis-1/2 mb-8">
-                I&apos;m {profile?.fullName ?? "John Doe"}. I live in{" "}
-                {profile?.location ?? "'X'"}, where I build the future.
+              <h1 className="font-headline font-bold tracking-tight sm:text-5xl text-3xl lg:leading-tight mb-8">
+                I&apos;m <span className="text-zinc-900 dark:text-white">{profile?.fullName ?? "John Doe"}</span>. I live in{" "}
+                <span className="text-zinc-900 dark:text-white">{profile?.location ?? "India"}</span>, where I build the future.
               </h1>
 
-              <div className="dark:text-zinc-400 text-zinc-600 leading-relaxed">
+              <div className="dark:text-zinc-400 text-zinc-600 leading-loose text-lg font-light">
                 {profile?.fullBio ? (
                   <PortableText
                     value={profile?.fullBio}
@@ -56,40 +50,43 @@ export default async function About() {
             </Slide>
           </div>
 
-          <aside className="flex flex-col lg:justify-self-center justify-self-start gap-y-8 lg:order-1 order-none mb-12">
+          <aside className="flex flex-col lg:justify-self-start justify-self-start gap-y-8 lg:order-1 order-none mb-12 w-full">
             <Slide delay={0.1}>
               <div className="sticky top-10">
-                {profile?.profileImage.image ? (
-                  <Image
-                    className="rounded-2xl mb-4 object-cover max-h-96 min-h-96 bg-top"
-                    src={profile?.profileImage.image}
-                    width={400}
-                    height={400}
-                    quality={100}
-                    alt={profile?.profileImage.alt}
-                    placeholder="blur"
-                    blurDataURL={profile?.profileImage.lqip}
-                    priority
-                  />
-                ) : (
-                  <div className="h-96 w-[400px] bg-zinc-500 mb-4"></div>
-                )}
+                <div className="relative group">
+                  {/* Minimal Decorator Frame */}
+                  <div className="absolute -inset-4 border border-zinc-200 dark:border-zinc-800 rounded-2xl md:block hidden" />
 
-                <div className="flex flex-col text-center gap-y-4">
-                  <div className="flex items-center gap-x-3">
+                  {profile?.profileImage.image ? (
+                    <Image
+                      className="rounded-xl mb-6 object-cover max-h-96 min-h-96 bg-top shadow-md dark:shadow-none"
+                      src={profile?.profileImage.image}
+                      width={400}
+                      height={400}
+                      quality={100}
+                      alt={profile?.profileImage.alt}
+                      priority
+                    />
+                  ) : (
+                    <div className="h-96 w-[400px] bg-zinc-200 dark:bg-zinc-800 mb-6 rounded-xl"></div>
+                  )}
+                </div>
+
+                <div className="flex flex-col gap-y-4">
+                  <div className="flex items-center gap-x-3 w-full">
                     <RefLink
                       href="https://drive.google.com/file/d/1JeCJ6lrxoU8z0neb4SXi3eqnry65GidL/view?usp=sharing"
-                      className="flex items-center justify-center text-center gap-x-2 basis-[90%] dark:bg-primary-bg bg-zinc-100 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 rounded-md py-2 text-lg font-incognito font-semibold"
+                      className="flex-1 flex items-center justify-center text-center gap-x-2 bg-zinc-900 dark:bg-white text-white dark:text-black border border-transparent hover:opacity-90 rounded-full py-3 text-base font-bold font-headline transition-opacity"
                     >
-                      View Résumé <BiLinkExternal className="text-base" />
+                      View CV <BiLinkExternal className="text-lg" />
                     </RefLink>
                     <a
                       href={`${profile?.resumeURL}?dl=${profile?.fullName}-resume.pdf`}
-                      className="flex items-center justify-center text-center dark:text-primary-color text-secondary-color hover:underline basis-[10%] dark:bg-primary-bg bg-zinc-100 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 rounded-md py-3 text-lg"
+                      className="flex items-center justify-center text-center p-3 rounded-full border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-zinc-600 dark:text-zinc-400"
                       title="Download Resume"
                     >
                       <BiSolidDownload
-                        className="text-lg"
+                        className="text-xl"
                         aria-label="Download Resume"
                       />
                     </a>
@@ -97,10 +94,10 @@ export default async function About() {
 
                   <a
                     href={`mailto:${profile?.email}`}
-                    className="flex items-center gap-x-2 hover:text-primary-color"
+                    className="flex items-center gap-x-2 text-zinc-500 hover:text-black dark:hover:text-white transition-colors text-sm font-mono justify-center border-t border-zinc-100 dark:border-zinc-800 pt-4 mt-2"
                   >
                     <BiEnvelope className="text-lg" />
-                    {profile?.email ?? "Email address no available"}
+                    {profile?.email ?? "contact@roshankharel.com"}
                   </a>
                 </div>
               </div>

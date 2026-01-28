@@ -1,24 +1,34 @@
 import "@/app/styles/globals.css";
 import Script from "next/script";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { incognito } from "./assets/font/font";
-import { gitlabmono } from "./assets/font/font";
+import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google"; // Import new fonts
 import Navbar from "./components/global/Navbar";
 import Footer from "./components/global/Footer";
 import { Providers } from "./providers";
 import { umamiSiteId } from "@/lib/env.api";
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--inter",
+  variable: "--font-dm-sans",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-space-grotesk",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains-mono",
 });
 
 const options = {
-  title: "Roshan Kharel | Software Developer",
+  title: "Roshan Kharel | AI Engineer & Architect",
   description:
-    "Roshan Kharel is a Software Developer and Technical Writer who is passionate about building solutions and contributing to open source communities",
+    "Roshan Kharel is a specialized AI Engineer and MLOps Architect building intelligent systems and scalable infrastructure.",
   url: "https://roshankharel.com",
   ogImage:
     "https://res.cloudinary.com/geekyroshan/image/upload/v1692635746/roshankharel/og.png",
@@ -53,7 +63,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${incognito.variable} ${inter.className} ${gitlabmono.variable} dark:bg-zinc-900 bg-white dark:text-white text-zinc-700`}
+        className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} dark:bg-zinc-950 bg-white dark:text-white text-zinc-700`}
       >
         <Providers>
           <Navbar />

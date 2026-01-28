@@ -12,13 +12,20 @@ body {
   background-image: url("../../public/noise.png");
   background-size: 200px 200px;
   background-position: 0 0;
+  /* Ensure the noise blends with the slate-950 background */
+  background-blend-mode: overlay;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--incognito), "Inter", sans-serif;
+  font-family: var(--font-space-grotesk), var(--font-inter), sans-serif;
+  letter-spacing: -0.03em;
+}
+
+code, pre {
+  font-family: var(--font-jetbrains-mono), monospace;
 }
 
 .path {

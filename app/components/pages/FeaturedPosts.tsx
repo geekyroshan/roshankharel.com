@@ -1,52 +1,34 @@
 import Link from "next/link";
-import Image from "next/legacy/image";
-import { postsQuery } from "@/lib/sanity.query";
-import type { PostType } from "@/types";
-import { sanityFetch } from "@/lib/sanity.client";
+import { posts } from "@/app/data/posts";
 
-export default async function FeaturedPosts({ params }: { params?: string }) {
-  const featuredPosts: PostType[] = await sanityFetch({
-    query: postsQuery,
-    tags: ["Post"],
-  });
+type Props = {
+  params?: string;
+};
+
+export default function FeaturedPosts({ params }: Props) {
+  const featuredPosts = posts.filter(
+    (post) => post.featured && post.slug !== params && post.isPublished
+  ).slice(0, 3);
+
+  if (featuredPosts.length === 0) return null;
 
   return (
-    <>
-      {featuredPosts.map((post) =>
-        post.featured !== true || post.isPublished !== true ? null : (
-          <article
-            key={post._id}
-            className={`mb-4 ${
-              post.slug === params ? "hidden" : "flex lg:flex-row flex-col"
-            }`}
+    <ul className="space-y-4">
+      {featuredPosts.map((post) => (
+        <li key={post._id}>
+          <Link
+            href={`/blog/${post.slug}`}
+            className="block p-3 -mx-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
           >
-            <Link
-              href={`/blog/${post.slug}`}
-              className="flex flex-col gap-4 dark:bg-primary-bg bg-secondary-bg p-5 rounded-lg border dark:border-zinc-800 border-zinc-200"
-            >
-              <Image
-                src={post.coverImage?.image}
-                className="dark:bg-zinc-800 bg-zinc-100 rounded-md object-cover"
-                alt={post.coverImage?.alt || post.title}
-                width={400}
-                height={230}
-                placeholder={post.coverImage ? "blur" : "empty"}
-                blurDataURL={post.coverImage?.lqip || ""}
-                quality={100}
-                loading="lazy"
-              />
-              <div className="max-w-lg">
-                <h2 className="max-w-sm text-lg tracking-tight mb-4">
-                  {post.title}
-                </h2>
-                <p className="dark:text-zinc-400 text-zinc-600 text-sm">
-                  {post.description.slice(0, 80).padEnd(83, "...")}
-                </p>
-              </div>
-            </Link>
-          </article>
-        )
-      )}
-    </>
+            <h4 className="text-sm font-medium line-clamp-2 mb-1">
+              {post.title}
+            </h4>
+            <p className="text-xs text-zinc-500 line-clamp-1">
+              {post.description}
+            </p>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }

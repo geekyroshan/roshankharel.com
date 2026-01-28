@@ -6,13 +6,8 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cdn.sanity.io",
-        port: "",
+        hostname: "**",
       },
-      { hostname: "icons.duckduckgo.com" },
-      { hostname: "res.cloudinary.com" },
-      { hostname: "www.google.com" },
-      { hostname: "images.unsplash.com" },
     ],
   },
 };

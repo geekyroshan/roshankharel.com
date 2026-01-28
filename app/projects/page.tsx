@@ -1,73 +1,39 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Metadata } from "next";
-import { projectsQuery } from "@/lib/sanity.query";
-import type { ProjectType } from "@/types";
-import EmptyState from "../components/shared/EmptyState";
-import { Slide } from "../animation/Slide";
-import { sanityFetch } from "@/lib/sanity.client";
+"use client";
+
+import { projects } from "@/app/data/portfolio";
 import PageHeading from "../components/shared/PageHeading";
+import { Slide } from "../animation/Slide";
+import NeuralNetworkProjects from "../components/pages/NeuralNetworkProjects";
 
-export const metadata: Metadata = {
-  title: "Project | Roshan",
-  metadataBase: new URL("https://geekyroshan.com/projects"),
-  description: "Explore projects built by Roshan",
-  openGraph: {
-    title: "Projects | Roshan Kharel",
-    url: "https://geekyroshan.com/projects",
-    description: "Explore projects built by Roshan",
-    images:
-      "https://res.cloudinary.com/geekyroshan/image/upload/v1692636087/roshankharel/projects.png",
-  },
-};
-
-export default async function Project() {
-  const projects: ProjectType[] = await sanityFetch({
-    query: projectsQuery,
-    tags: ["project"],
-  });
-
+export default function ProjectsPage() {
   return (
     <main className="max-w-7xl mx-auto md:px-16 px-6">
       <PageHeading
         title="Projects"
-        description="I've worked on tons of little projects over the years but these are the ones that I'm most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas on how it can be improved."
+        description="Explore my work through an interactive neural network. Each node represents a project I've built — from ML pipelines to production AI systems."
       />
 
       <Slide delay={0.1}>
-        {projects.length > 0 ? (
-          <section className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mb-12">
+        <NeuralNetworkProjects projects={projects} />
+      </Slide>
+
+      {/* Fallback grid for smaller screens */}
+      <Slide delay={0.2}>
+        <div className="mt-16 lg:hidden">
+          <h3 className="text-2xl font-bold font-headline mb-6">All Projects</h3>
+          <div className="grid grid-cols-1 gap-4">
             {projects.map((project) => (
-              <Link
-                href={`/projects/${project.slug}`}
+              <a
                 key={project._id}
-                className="flex items-center gap-x-4 dark:bg-primary-bg bg-zinc-50 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 p-4 rounded-lg"
+                href={project.projectUrl || `/projects/${project.slug}`}
+                className="block p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors"
               >
-                {project.logo ? (
-                  <Image
-                    src={project.logo}
-                    width={60}
-                    height={60}
-                    alt={project.name}
-                    className="dark:bg-zinc-800 bg-zinc-100 rounded-md p-2"
-                  />
-                ) : (
-                  <div className="dark:bg-primary-bg bg-zinc-50 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 p-2 rounded-lg text-3xl">
-                    🪴
-                  </div>
-                )}
-                <div>
-                  <h2 className="text-lg tracking-wide mb-1">{project.name}</h2>
-                  <div className="text-sm dark:text-zinc-400 text-zinc-600">
-                    {project.tagline}
-                  </div>
-                </div>
-              </Link>
+                <h4 className="font-bold text-lg">{project.name}</h4>
+                <p className="text-zinc-500 text-sm mt-1">{project.tagline}</p>
+              </a>
             ))}
-          </section>
-        ) : (
-          <EmptyState value="Projects" />
-        )}
+          </div>
+        </div>
       </Slide>
     </main>
   );
