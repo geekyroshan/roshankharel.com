@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="400" fill="url(#bg3)"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="24" font-weight="bold">Aya Knowledge Base</text>
+  <text x="400" y="58" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="12">Enterprise RAG with Zero Hallucinations</text>
+
+  <!-- Documents Input -->
+  <rect x="30" y="90" width="100" height="130" rx="10" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+  <text x="80" y="115" text-anchor="middle" fill="#6366f1" font-family="system-ui" font-size="10" font-weight="bold">DOCUMENTS</text>
+  <rect x="45" y="130" width="70" height="20" rx="4" fill="#27272a"/>
+  <text x="80" y="144" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">PDF</text>
+  <rect x="45" y="155" width="70" height="20" rx="4" fill="#27272a"/>
+  <text x="80" y="169" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">DOCX</text>
+  <rect x="45" y="180" width="70" height="20" rx="4" fill="#27272a"/>
+  <text x="80" y="194" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="9">PPTX/XLSX</text>
+
+  <!-- Arrow -->
+  <path d="M 140 155 L 170 155" stroke="#4b5563" stroke-width="2" marker-end="url(#ar3)"/>
+  <defs><marker id="ar3" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#4b5563"/></marker></defs>
+
+  <!-- Processing Pipeline -->
+  <rect x="180" y="80" width="150" height="150" rx="12" fill="#18181b" stroke="#ec4899" stroke-width="2"/>
+  <text x="255" y="105" text-anchor="middle" fill="#ec4899" font-family="system-ui" font-size="10" font-weight="bold">PROCESSING</text>
+  <rect x="195" y="115" width="120" height="22" rx="4" fill="#27272a"/>
+  <text x="255" y="130" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Docling Parser</text>
+  <rect x="195" y="142" width="120" height="22" rx="4" fill="#27272a"/>
+  <text x="255" y="157" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">PII Detection</text>
+  <rect x="195" y="169" width="120" height="22" rx="4" fill="#27272a"/>
+  <text x="255" y="184" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Embeddings</text>
+  <rect x="195" y="196" width="120" height="22" rx="4" fill="#27272a"/>
+  <text x="255" y="211" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="9">all-MiniLM-L6-v2</text>
+
+  <!-- Arrow -->
+  <path d="M 340 155 L 370 155" stroke="#4b5563" stroke-width="2" marker-end="url(#ar3)"/>
+
+  <!-- Vector DB -->
+  <rect x="380" y="100" width="120" height="110" rx="12" fill="#18181b" stroke="#22c55e" stroke-width="2"/>
+  <text x="440" y="125" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="10" font-weight="bold">VECTOR DB</text>
+  <circle cx="440" cy="160" r="25" fill="#27272a" stroke="#22c55e" stroke-width="1"/>
+  <text x="440" y="165" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="18">P</text>
+  <text x="440" y="200" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="10">Pinecone</text>
+
+  <!-- Arrow -->
+  <path d="M 510 155 L 540 155" stroke="#4b5563" stroke-width="2" marker-end="url(#ar3)"/>
+
+  <!-- RAG Engine -->
+  <rect x="550" y="80" width="120" height="150" rx="12" fill="#18181b" stroke="#f59e0b" stroke-width="2"/>
+  <text x="610" y="105" text-anchor="middle" fill="#f59e0b" font-family="system-ui" font-size="10" font-weight="bold">RAG ENGINE</text>
+  <rect x="565" y="115" width="90" height="22" rx="4" fill="#27272a"/>
+  <text x="610" y="130" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">PageIndex</text>
+  <rect x="565" y="142" width="90" height="22" rx="4" fill="#27272a"/>
+  <text x="610" y="157" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">GPT-4o-mini</text>
+  <rect x="565" y="169" width="90" height="22" rx="4" fill="#27272a"/>
+  <text x="610" y="184" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Grounding Check</text>
+  <rect x="565" y="196" width="90" height="22" rx="4" fill="#dc2626"/>
+  <text x="610" y="211" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Hallucination: 0.3</text>
+
+  <!-- Arrow -->
+  <path d="M 680 155 L 710 155" stroke="#4b5563" stroke-width="2" marker-end="url(#ar3)"/>
+
+  <!-- Output -->
+  <rect x="720" y="110" width="70" height="90" rx="10" fill="#18181b" stroke="#6366f1" stroke-width="2"/>
+  <text x="755" y="135" text-anchor="middle" fill="#6366f1" font-family="system-ui" font-size="9" font-weight="bold">OUTPUT</text>
+  <text x="755" y="160" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="10">Answer +</text>
+  <text x="755" y="175" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="10">Sources</text>
+  <text x="755" y="192" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">page, snippet</text>
+
+  <!-- Security Layer -->
+  <rect x="30" y="250" width="760" height="50" rx="8" fill="#18181b" stroke="#dc2626" stroke-width="1"/>
+  <text x="80" y="280" text-anchor="middle" fill="#dc2626" font-family="system-ui" font-size="10" font-weight="bold">SECURITY</text>
+  <text x="200" y="280" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">JWT Auth</text>
+  <text x="320" y="280" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Rate Limiting</text>
+  <text x="440" y="280" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Input Validation</text>
+  <text x="560" y="280" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">PII Redaction</text>
+  <text x="700" y="280" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Audit Logs</text>
+
+  <!-- Stats -->
+  <rect x="30" y="320" width="760" height="60" rx="10" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+  <text x="120" y="350" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="16" font-weight="bold">333+</text>
+  <text x="120" y="368" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="9">Tests Passing</text>
+  <text x="280" y="350" text-anchor="middle" fill="#6366f1" font-family="system-ui" font-size="16" font-weight="bold">16,000+</text>
+  <text x="280" y="368" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="9">Lines of Code</text>
+  <text x="440" y="350" text-anchor="middle" fill="#dc2626" font-family="system-ui" font-size="16" font-weight="bold">OWASP</text>
+  <text x="440" y="368" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="9">Top 10 Secured</text>
+  <text x="600" y="350" text-anchor="middle" fill="#f59e0b" font-family="system-ui" font-size="16" font-weight="bold">0.7+</text>
+  <text x="600" y="368" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="9">Similarity Threshold</text>
+  <text x="720" y="350" text-anchor="middle" fill="#ec4899" font-family="system-ui" font-size="16" font-weight="bold">0</text>
+  <text x="720" y="368" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="9">Hallucinations</text>
+</svg>

@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 interface Project {
     _id: string;
@@ -14,217 +13,229 @@ interface Project {
 }
 
 export default function NeuralNetworkProjects({ projects }: { projects: Project[] }) {
-    const [activeId, setActiveId] = useState<string | null>(null);
-    const [hoveredNode, setHoveredNode] = useState<number | null>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [isDark, setIsDark] = useState(true);
+    const animationRef = useRef<number>();
+    const nodesRef = useRef<{ x: number; y: number; vx: number; vy: number; project: Project }[]>([]);
 
-    // Generate positions for nodes in a circular pattern
-    const getNodePosition = (index: number, total: number) => {
-        const angle = (index / total) * Math.PI * 2 - Math.PI / 2;
-        const radius = 35; // percentage from center
-        const x = 50 + Math.cos(angle) * radius;
-        const y = 50 + Math.sin(angle) * radius;
-        return { x, y };
-    };
+    // Detect theme
+    useEffect(() => {
+        const checkTheme = () => {
+            setIsDark(document.documentElement.classList.contains("dark"));
+        };
+        checkTheme();
+        const observer = new MutationObserver(checkTheme);
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+        return () => observer.disconnect();
+    }, []);
 
-    // Generate SVG path for connection lines
-    const generateConnections = () => {
-        const lines: JSX.Element[] = [];
-        for (let i = 0; i < projects.length; i++) {
-            for (let j = i + 1; j < projects.length; j++) {
-                const pos1 = getNodePosition(i, projects.length);
-                const pos2 = getNodePosition(j, projects.length);
-                const isActive = activeId === projects[i]._id || activeId === projects[j]._id;
-                lines.push(
-                    <motion.line
-                        key={`${i}-${j}`}
-                        x1={`${pos1.x}%`}
-                        y1={`${pos1.y}%`}
-                        x2={`${pos2.x}%`}
-                        y2={`${pos2.y}%`}
-                        stroke={isActive ? "#ffffff" : "#333333"}
-                        strokeWidth={isActive ? 1.5 : 0.5}
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1, delay: i * 0.1 }}
-                    />
-                );
-            }
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const container = containerRef.current;
+        if (!canvas || !container) return;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        const resizeCanvas = () => {
+            const rect = container.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            canvas.style.width = `${rect.width}px`;
+            canvas.style.height = `${rect.height}px`;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        };
+
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        // Initialize nodes
+        const width = container.getBoundingClientRect().width;
+        const height = container.getBoundingClientRect().height;
+
+        if (nodesRef.current.length === 0) {
+            nodesRef.current = projects.map((project, i) => {
+                const angle = (i / projects.length) * Math.PI * 2;
+                const radius = Math.min(width, height) * 0.32;
+                return {
+                    x: width / 2 + Math.cos(angle) * radius + (Math.random() - 0.5) * 30,
+                    y: height / 2 + Math.sin(angle) * radius + (Math.random() - 0.5) * 30,
+                    vx: (Math.random() - 0.5) * 0.2,
+                    vy: (Math.random() - 0.5) * 0.2,
+                    project,
+                };
+            });
         }
-        return lines;
+
+        // Theme-aware colors
+        const colors = {
+            bg: isDark ? "#000000" : "#ffffff",
+            connection: isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.08)",
+            connectionHover: isDark ? "rgba(139, 92, 246, 0.4)" : "rgba(139, 92, 246, 0.3)",
+            node: isDark ? "rgba(255, 255, 255, 0.95)" : "rgba(24, 24, 27, 0.95)",
+            nodeHover: "#8b5cf6",
+            nodeText: isDark ? "#000" : "#fff",
+            nodeTextHover: "#fff",
+            glowCenter: isDark ? "rgba(139, 92, 246, 0.12)" : "rgba(139, 92, 246, 0.08)",
+            glowMid: isDark ? "rgba(236, 72, 153, 0.05)" : "rgba(236, 72, 153, 0.03)",
+        };
+
+        // Animation loop
+        const animate = () => {
+            const rect = container.getBoundingClientRect();
+            ctx.fillStyle = colors.bg;
+            ctx.fillRect(0, 0, rect.width, rect.height);
+
+            // Update node positions with gentle floating
+            nodesRef.current.forEach((node) => {
+                node.x += node.vx;
+                node.y += node.vy;
+
+                // Boundary check with soft bounce
+                const padding = 50;
+                if (node.x < padding || node.x > rect.width - padding) node.vx *= -0.9;
+                if (node.y < padding || node.y > rect.height - padding) node.vy *= -0.9;
+
+                // Add slight random movement
+                node.vx += (Math.random() - 0.5) * 0.015;
+                node.vy += (Math.random() - 0.5) * 0.015;
+
+                // Damping
+                node.vx *= 0.995;
+                node.vy *= 0.995;
+            });
+
+            // Draw connections - more visible
+            nodesRef.current.forEach((node, i) => {
+                nodesRef.current.slice(i + 1).forEach((other) => {
+                    const dist = Math.hypot(node.x - other.x, node.y - other.y);
+                    if (dist < 250) {
+                        const isHovered = hoveredProject &&
+                            (hoveredProject._id === node.project._id || hoveredProject._id === other.project._id);
+                        const opacity = (1 - dist / 250) * (isHovered ? 0.5 : 0.15);
+
+                        ctx.strokeStyle = isHovered
+                            ? `rgba(139, 92, 246, ${opacity})`
+                            : isDark
+                                ? `rgba(255, 255, 255, ${opacity})`
+                                : `rgba(0, 0, 0, ${opacity * 0.7})`;
+                        ctx.lineWidth = isHovered ? 2 : 1;
+                        ctx.beginPath();
+                        ctx.moveTo(node.x, node.y);
+                        ctx.lineTo(other.x, other.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            // Draw center glow
+            const gradient = ctx.createRadialGradient(
+                rect.width / 2, rect.height / 2, 0,
+                rect.width / 2, rect.height / 2, 120
+            );
+            gradient.addColorStop(0, colors.glowCenter);
+            gradient.addColorStop(0.6, colors.glowMid);
+            gradient.addColorStop(1, "transparent");
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(rect.width / 2, rect.height / 2, 120, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw nodes
+            nodesRef.current.forEach((node) => {
+                const isHovered = hoveredProject?._id === node.project._id;
+                const size = isHovered ? 24 : 18;
+
+                // Glow effect for hovered
+                if (isHovered) {
+                    const glow = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 45);
+                    glow.addColorStop(0, "rgba(139, 92, 246, 0.35)");
+                    glow.addColorStop(1, "transparent");
+                    ctx.fillStyle = glow;
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, 45, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Node circle
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, size, 0, Math.PI * 2);
+                ctx.fillStyle = isHovered ? colors.nodeHover : colors.node;
+                ctx.fill();
+
+                // Node letter
+                ctx.fillStyle = isHovered ? colors.nodeTextHover : colors.nodeText;
+                ctx.font = `600 ${isHovered ? 12 : 10}px "DM Sans", system-ui, sans-serif`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(node.project.name.charAt(0), node.x, node.y);
+            });
+
+            animationRef.current = requestAnimationFrame(animate);
+        };
+
+        animate();
+
+        return () => {
+            window.removeEventListener("resize", resizeCanvas);
+            if (animationRef.current) cancelAnimationFrame(animationRef.current);
+        };
+    }, [projects, hoveredProject, isDark]);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const rect = containerRef.current?.getBoundingClientRect();
+        if (!rect) return;
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        setMousePos({ x, y });
+
+        // Check if hovering over a node
+        const hovered = nodesRef.current.find((node) => {
+            const dist = Math.hypot(node.x - x, node.y - y);
+            return dist < 25;
+        });
+        setHoveredProject(hovered?.project || null);
     };
 
     return (
-        <div className="relative w-full h-[75vh] rounded-3xl overflow-hidden bg-zinc-950 border border-zinc-800">
-            {/* Animated background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950" />
+        <div className="relative mb-12">
+            {/* Canvas container */}
+            <div
+                ref={containerRef}
+                className="relative h-[350px] rounded-2xl overflow-hidden bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={() => setHoveredProject(null)}
+            >
+                <canvas ref={canvasRef} className="absolute inset-0" />
 
-            {/* Particle dots */}
-            <div className="absolute inset-0 overflow-hidden">
-                {Array.from({ length: 50 }).map((_, i) => (
+                {/* Hover tooltip */}
+                {hoveredProject && (
                     <motion.div
-                        key={i}
-                        className="absolute w-1 h-1 bg-zinc-700 rounded-full"
-                        initial={{
-                            x: `${Math.random() * 100}%`,
-                            y: `${Math.random() * 100}%`,
-                            opacity: 0.3
-                        }}
-                        animate={{
-                            x: `${Math.random() * 100}%`,
-                            y: `${Math.random() * 100}%`,
-                            opacity: [0.3, 0.6, 0.3]
-                        }}
-                        transition={{
-                            duration: 10 + Math.random() * 10,
-                            repeat: Infinity,
-                            repeatType: "reverse"
-                        }}
-                    />
-                ))}
-            </div>
-
-            {/* Title */}
-            <div className="absolute top-6 left-6 z-20">
-                <h2 className="text-3xl font-bold font-headline text-white">Neural Network</h2>
-                <p className="text-zinc-500 text-sm mt-1">Interactive project constellation</p>
-            </div>
-
-            {/* Instructions */}
-            <div className="absolute bottom-6 right-6 z-20">
-                <p className="text-zinc-600 text-xs">Hover nodes to explore • Click to visit</p>
-            </div>
-
-            {/* SVG Network Visualization */}
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-                {/* Connection lines */}
-                <g className="connections">
-                    {generateConnections()}
-                </g>
-
-                {/* Center node */}
-                <motion.circle
-                    cx="50%"
-                    cy="50%"
-                    r="3"
-                    fill="#ffffff"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                />
-
-                {/* Connection lines from center to outer nodes */}
-                {projects.map((project, index) => {
-                    const pos = getNodePosition(index, projects.length);
-                    return (
-                        <motion.line
-                            key={`center-${index}`}
-                            x1="50%"
-                            y1="50%"
-                            x2={`${pos.x}%`}
-                            y2={`${pos.y}%`}
-                            stroke={activeId === project._id ? "#ffffff" : "#444444"}
-                            strokeWidth={activeId === project._id ? 2 : 1}
-                            strokeDasharray="4 2"
-                            initial={{ pathLength: 0 }}
-                            animate={{ pathLength: 1 }}
-                            transition={{ duration: 0.8, delay: index * 0.1 }}
-                        />
-                    );
-                })}
-            </svg>
-
-            {/* Project Nodes */}
-            {projects.map((project, index) => {
-                const pos = getNodePosition(index, projects.length);
-                const isActive = activeId === project._id;
-
-                return (
-                    <motion.div
-                        key={project._id}
-                        className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10"
-                        style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                        onMouseEnter={() => {
-                            setActiveId(project._id);
-                            setHoveredNode(index);
-                        }}
-                        onMouseLeave={() => {
-                            setActiveId(null);
-                            setHoveredNode(null);
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="absolute z-20 pointer-events-none"
+                        style={{
+                            left: mousePos.x,
+                            top: mousePos.y - 65,
+                            transform: "translateX(-50%)"
                         }}
                     >
-                        <Link
-                            href={project.projectUrl || `/projects/${project.slug}`}
-                            className="block"
-                        >
-                            <motion.div
-                                className={`relative cursor-pointer transition-all duration-300 ${isActive ? "scale-125" : "scale-100"
-                                    }`}
-                            >
-                                {/* Outer ring */}
-                                <motion.div
-                                    className={`absolute inset-0 rounded-full border-2 ${isActive ? "border-white" : "border-zinc-600"
-                                        }`}
-                                    style={{ width: 60, height: 60, margin: -10 }}
-                                    animate={isActive ? { scale: [1, 1.2, 1] } : {}}
-                                    transition={{ duration: 1, repeat: Infinity }}
-                                />
-
-                                {/* Core node */}
-                                <div
-                                    className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-300 ${isActive
-                                            ? "bg-white text-black shadow-lg shadow-white/20"
-                                            : "bg-zinc-800 text-white"
-                                        }`}
-                                >
-                                    {project.name.charAt(0)}
-                                </div>
-                            </motion.div>
-
-                            {/* Label */}
-                            <AnimatePresence>
-                                {isActive && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: 10 }}
-                                        className="absolute left-1/2 -translate-x-1/2 mt-4 whitespace-nowrap"
-                                    >
-                                        <div className="bg-black/90 backdrop-blur-sm px-4 py-2 rounded-xl border border-zinc-700">
-                                            <p className="text-white font-bold text-sm">{project.name}</p>
-                                            <p className="text-zinc-400 text-xs max-w-[200px] truncate">{project.tagline}</p>
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </Link>
-                    </motion.div>
-                );
-            })}
-
-            {/* Project List Sidebar */}
-            <div className="absolute left-6 top-24 z-10 max-h-[50vh] overflow-y-auto">
-                <div className="space-y-2">
-                    {projects.map((project) => (
-                        <Link
-                            key={project._id}
-                            href={project.projectUrl || `/projects/${project.slug}`}
-                            className={`block p-3 rounded-xl transition-all duration-300 ${activeId === project._id
-                                    ? "bg-white text-black"
-                                    : "bg-zinc-900/80 text-white hover:bg-zinc-800"
-                                }`}
-                            onMouseEnter={() => setActiveId(project._id)}
-                            onMouseLeave={() => setActiveId(null)}
-                        >
-                            <p className="font-bold text-sm">{project.name}</p>
-                            <p className={`text-xs truncate max-w-[160px] ${activeId === project._id ? "text-zinc-600" : "text-zinc-400"
-                                }`}>
-                                {project.tagline}
+                        <div className="bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 px-4 py-2.5 rounded-xl shadow-xl">
+                            <p className="font-semibold text-sm">{hoveredProject.name}</p>
+                            <p className="text-xs text-zinc-400 dark:text-zinc-600 max-w-[180px] truncate">
+                                {hoveredProject.tagline}
                             </p>
-                        </Link>
-                    ))}
+                        </div>
+                    </motion.div>
+                )}
+
+                {/* Corner badge */}
+                <div className="absolute bottom-3 right-4 text-xs text-zinc-400 dark:text-zinc-600 font-medium">
+                    {projects.length} projects
                 </div>
             </div>
         </div>

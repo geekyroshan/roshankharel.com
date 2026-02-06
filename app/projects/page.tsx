@@ -1,40 +1,37 @@
 "use client";
 
 import { projects } from "@/app/data/portfolio";
-import PageHeading from "../components/shared/PageHeading";
 import { Slide } from "../animation/Slide";
 import NeuralNetworkProjects from "../components/pages/NeuralNetworkProjects";
+import ProjectShowcase from "../components/pages/ProjectShowcase";
 
 export default function ProjectsPage() {
-  return (
-    <main className="max-w-7xl mx-auto md:px-16 px-6">
-      <PageHeading
-        title="Projects"
-        description="Explore my work through an interactive neural network. Each node represents a project I've built — from ML pipelines to production AI systems."
-      />
+    return (
+        <main className="max-w-7xl mx-auto md:px-16 px-6 lg:mt-32 mt-20">
+            {/* Hero Section */}
+            <Slide>
+                <div className="text-center mb-8">
+                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+                        <span className="text-zinc-900 dark:text-white">My </span>
+                        <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-orange-500 bg-clip-text text-transparent">
+                            Work
+                        </span>
+                    </h1>
+                    <p className="text-zinc-600 dark:text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                        Building intelligent systems that solve real problems.
+                        <br className="hidden md:block" />
+                        Each node represents a project in my AI journey.
+                    </p>
+                </div>
+            </Slide>
 
-      <Slide delay={0.1}>
-        <NeuralNetworkProjects projects={projects} />
-      </Slide>
+            {/* Neural Network Visualization - Clean, minimal */}
+            <Slide delay={0.1}>
+                <NeuralNetworkProjects projects={projects} />
+            </Slide>
 
-      {/* Fallback grid for smaller screens */}
-      <Slide delay={0.2}>
-        <div className="mt-16 lg:hidden">
-          <h3 className="text-2xl font-bold font-headline mb-6">All Projects</h3>
-          <div className="grid grid-cols-1 gap-4">
-            {projects.map((project) => (
-              <a
-                key={project._id}
-                href={project.projectUrl || `/projects/${project.slug}`}
-                className="block p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors"
-              >
-                <h4 className="font-bold text-lg">{project.name}</h4>
-                <p className="text-zinc-500 text-sm mt-1">{project.tagline}</p>
-              </a>
-            ))}
-          </div>
-        </div>
-      </Slide>
-    </main>
-  );
+            {/* Project Showcase */}
+            <ProjectShowcase projects={projects} />
+        </main>
+    );
 }

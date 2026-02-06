@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="400" fill="url(#bg8)"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="24" font-weight="bold">Resume Weaver</text>
+  <text x="400" y="58" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="12">AI Resume Tailoring That Preserves Your Truth</text>
+
+  <!-- Input -->
+  <rect x="30" y="100" width="140" height="180" rx="12" fill="#18181b" stroke="#6366f1" stroke-width="2"/>
+  <text x="100" y="125" text-anchor="middle" fill="#6366f1" font-family="system-ui" font-size="10" font-weight="bold">INPUTS</text>
+  <!-- PDF icon -->
+  <rect x="55" y="140" width="90" height="50" rx="6" fill="#27272a"/>
+  <text x="100" y="165" text-anchor="middle" fill="#dc2626" font-family="system-ui" font-size="18" font-weight="bold">PDF</text>
+  <text x="100" y="180" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">Base Resume</text>
+  <!-- JD -->
+  <rect x="55" y="200" width="90" height="35" rx="6" fill="#27272a"/>
+  <text x="100" y="222" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Job Description</text>
+  <!-- Keywords -->
+  <rect x="55" y="240" width="90" height="25" rx="6" fill="#27272a"/>
+  <text x="100" y="257" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="9">Keywords (opt)</text>
+
+  <!-- Arrow -->
+  <path d="M 180 190 L 220 190" stroke="#4b5563" stroke-width="2" marker-end="url(#ar8)"/>
+  <defs><marker id="ar8" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#4b5563"/></marker></defs>
+
+  <!-- Processing -->
+  <rect x="230" y="100" width="180" height="180" rx="12" fill="#18181b" stroke="#ec4899" stroke-width="2"/>
+  <text x="320" y="125" text-anchor="middle" fill="#ec4899" font-family="system-ui" font-size="10" font-weight="bold">AI PROCESSING</text>
+  <rect x="245" y="140" width="150" height="25" rx="4" fill="#27272a"/>
+  <text x="320" y="157" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">PDF.js Extraction</text>
+  <rect x="245" y="170" width="150" height="25" rx="4" fill="#27272a"/>
+  <text x="320" y="187" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">JD Analysis</text>
+  <rect x="245" y="200" width="150" height="25" rx="4" fill="#27272a"/>
+  <text x="320" y="217" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">OpenAI Tailoring</text>
+  <rect x="245" y="230" width="150" height="35" rx="4" fill="#22c55e" fill-opacity="0.2" stroke="#22c55e" stroke-width="1"/>
+  <text x="320" y="250" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="9">Never Fabricates</text>
+  <text x="320" y="262" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="8">Only rewrites existing</text>
+
+  <!-- Arrow -->
+  <path d="M 420 190 L 460 190" stroke="#4b5563" stroke-width="2" marker-end="url(#ar8)"/>
+
+  <!-- Outputs -->
+  <rect x="470" y="100" width="160" height="180" rx="12" fill="#18181b" stroke="#22c55e" stroke-width="2"/>
+  <text x="550" y="125" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="10" font-weight="bold">OUTPUTS</text>
+  <rect x="485" y="140" width="130" height="30" rx="6" fill="#27272a"/>
+  <text x="550" y="160" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="10">Tailored Resume</text>
+  <rect x="485" y="175" width="130" height="30" rx="6" fill="#27272a"/>
+  <text x="550" y="195" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="10">Cover Letter</text>
+  <rect x="485" y="210" width="130" height="30" rx="6" fill="#27272a"/>
+  <text x="550" y="230" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="10">Keyword Analysis</text>
+  <rect x="485" y="245" width="130" height="25" rx="6" fill="#dc2626"/>
+  <text x="550" y="262" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="10">PDF Export</text>
+
+  <!-- Arrow -->
+  <path d="M 640 190 L 680 190" stroke="#4b5563" stroke-width="2" marker-end="url(#ar8)"/>
+
+  <!-- Preview -->
+  <rect x="690" y="120" width="90" height="140" rx="8" fill="#18181b" stroke="#ffffff" stroke-width="1"/>
+  <rect x="700" y="130" width="70" height="8" rx="2" fill="#3f3f46"/>
+  <rect x="700" y="145" width="50" height="4" rx="1" fill="#27272a"/>
+  <rect x="700" y="155" width="70" height="4" rx="1" fill="#27272a"/>
+  <rect x="700" y="165" width="60" height="4" rx="1" fill="#27272a"/>
+  <rect x="700" y="180" width="70" height="4" rx="1" fill="#27272a"/>
+  <rect x="700" y="190" width="55" height="4" rx="1" fill="#27272a"/>
+  <rect x="700" y="205" width="70" height="4" rx="1" fill="#27272a"/>
+  <rect x="700" y="215" width="65" height="4" rx="1" fill="#27272a"/>
+  <rect x="700" y="230" width="70" height="4" rx="1" fill="#27272a"/>
+  <rect x="700" y="240" width="50" height="4" rx="1" fill="#27272a"/>
+  <text x="735" y="275" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">Same Style</text>
+
+  <!-- Tech Stack -->
+  <rect x="30" y="310" width="740" height="70" rx="10" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+  <text x="100" y="345" text-anchor="middle" fill="#6366f1" font-family="system-ui" font-size="11" font-weight="bold">React 18</text>
+  <text x="100" y="360" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">TypeScript</text>
+  <text x="220" y="345" text-anchor="middle" fill="#f59e0b" font-family="system-ui" font-size="11" font-weight="bold">Vite</text>
+  <text x="220" y="360" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">Build Tool</text>
+  <text x="340" y="345" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="11" font-weight="bold">OpenAI</text>
+  <text x="340" y="360" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">LLM</text>
+  <text x="460" y="345" text-anchor="middle" fill="#dc2626" font-family="system-ui" font-size="11" font-weight="bold">PDF.js</text>
+  <text x="460" y="360" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">Parsing</text>
+  <text x="580" y="345" text-anchor="middle" fill="#ec4899" font-family="system-ui" font-size="11" font-weight="bold">TanStack</text>
+  <text x="580" y="360" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">Query</text>
+  <text x="700" y="345" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="11" font-weight="bold">Shadcn</text>
+  <text x="700" y="360" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">UI</text>
+</svg>

@@ -63,7 +63,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} dark:bg-zinc-950 bg-white dark:text-white text-zinc-700`}
+        className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans dark:bg-zinc-950 bg-white dark:text-white text-zinc-700`}
       >
         <Providers>
           <Navbar />

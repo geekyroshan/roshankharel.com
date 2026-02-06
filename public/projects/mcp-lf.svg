@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="400" fill="url(#bg10)"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="24" font-weight="bold">MCP Lost &amp; Found</text>
+  <text x="400" y="58" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="12">Hyper-Local Community Registry | MCP 1st Birthday Hackathon</text>
+
+  <!-- Finder -->
+  <circle cx="100" cy="160" r="45" fill="#18181b" stroke="#22c55e" stroke-width="2"/>
+  <circle cx="100" cy="145" r="12" fill="#27272a"/>
+  <ellipse cx="100" cy="175" rx="20" ry="12" fill="#27272a"/>
+  <text x="100" y="220" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="11" font-weight="bold">FINDER</text>
+
+  <!-- Report arrow -->
+  <path d="M 155 160 L 210 160" stroke="#22c55e" stroke-width="2" marker-end="url(#ar10)"/>
+  <text x="182" y="150" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="8">report_found</text>
+  <defs><marker id="ar10" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#22c55e"/></marker></defs>
+
+  <!-- MCP Server -->
+  <rect x="220" y="90" width="180" height="180" rx="16" fill="#18181b" stroke="#6366f1" stroke-width="2"/>
+  <text x="310" y="120" text-anchor="middle" fill="#6366f1" font-family="system-ui" font-size="12" font-weight="bold">MCP SERVER</text>
+
+  <!-- Tools -->
+  <rect x="235" y="135" width="150" height="22" rx="4" fill="#27272a"/>
+  <text x="310" y="150" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">report_found</text>
+  <rect x="235" y="162" width="150" height="22" rx="4" fill="#27272a"/>
+  <text x="310" y="177" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">search_lost</text>
+  <rect x="235" y="189" width="150" height="22" rx="4" fill="#27272a"/>
+  <text x="310" y="204" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">suggest_matches</text>
+  <rect x="235" y="216" width="150" height="22" rx="4" fill="#27272a"/>
+  <text x="310" y="231" text-anchor="middle" fill="#f59e0b" font-family="system-ui" font-size="9">lock_item → unblind</text>
+  <text x="310" y="258" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">SQLite + Gradio 6</text>
+
+  <!-- Matcher arrow -->
+  <path d="M 410 160 L 470 160" stroke="#ec4899" stroke-width="2" marker-end="url(#ar10b)"/>
+  <text x="440" y="150" text-anchor="middle" fill="#ec4899" font-family="system-ui" font-size="8">match</text>
+  <defs><marker id="ar10b" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#ec4899"/></marker></defs>
+
+  <!-- Matching Engine -->
+  <rect x="480" y="110" width="140" height="140" rx="12" fill="#18181b" stroke="#ec4899" stroke-width="2"/>
+  <text x="550" y="135" text-anchor="middle" fill="#ec4899" font-family="system-ui" font-size="10" font-weight="bold">MATCHING</text>
+  <rect x="495" y="150" width="110" height="25" rx="4" fill="#27272a"/>
+  <text x="550" y="167" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Semantic Search</text>
+  <rect x="495" y="180" width="110" height="25" rx="4" fill="#27272a"/>
+  <text x="550" y="197" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Location Filter</text>
+  <rect x="495" y="210" width="110" height="25" rx="4" fill="#27272a"/>
+  <text x="550" y="227" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="9">2-3km radius</text>
+
+  <!-- Notify arrow -->
+  <path d="M 630 160 L 690 160" stroke="#f59e0b" stroke-width="2" marker-end="url(#ar10c)"/>
+  <defs><marker id="ar10c" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#f59e0b"/></marker></defs>
+
+  <!-- Seeker -->
+  <circle cx="740" cy="160" r="45" fill="#18181b" stroke="#f59e0b" stroke-width="2"/>
+  <circle cx="740" cy="145" r="12" fill="#27272a"/>
+  <ellipse cx="740" cy="175" rx="20" ry="12" fill="#27272a"/>
+  <text x="740" y="220" text-anchor="middle" fill="#f59e0b" font-family="system-ui" font-size="11" font-weight="bold">SEEKER</text>
+
+  <!-- Security Feature -->
+  <rect x="220" y="290" width="180" height="80" rx="10" fill="#18181b" stroke="#dc2626" stroke-width="1"/>
+  <text x="310" y="315" text-anchor="middle" fill="#dc2626" font-family="system-ui" font-size="10" font-weight="bold">LOCATION BLINDING</text>
+  <text x="310" y="340" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Coordinates hidden</text>
+  <text x="310" y="358" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">until pickup locked</text>
+
+  <!-- Verification -->
+  <rect x="420" y="290" width="180" height="80" rx="10" fill="#18181b" stroke="#22c55e" stroke-width="1"/>
+  <text x="510" y="315" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="10" font-weight="bold">VERIFIED PICKUP</text>
+  <text x="510" y="340" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">Confirmation flow</text>
+  <text x="510" y="358" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">Stats dashboard</text>
+
+  <!-- HF Spaces -->
+  <rect x="620" y="290" width="160" height="80" rx="10" fill="#18181b" stroke="#6366f1" stroke-width="1"/>
+  <text x="700" y="320" text-anchor="middle" fill="#6366f1" font-family="system-ui" font-size="14" font-weight="bold">HuggingFace</text>
+  <text x="700" y="340" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="10">Spaces</text>
+  <text x="700" y="358" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">Live Demo</text>
+
+  <!-- Hackathon badge -->
+  <rect x="30" y="290" width="170" height="80" rx="10" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-width="1"/>
+  <text x="115" y="320" text-anchor="middle" fill="#f59e0b" font-family="system-ui" font-size="11" font-weight="bold">MCP HACKATHON</text>
+  <text x="115" y="340" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="10">1st Birthday</text>
+  <text x="115" y="358" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="8">Track 2: MCP in Action</text>
+</svg>

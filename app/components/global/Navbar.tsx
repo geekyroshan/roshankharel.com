@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
-import Logo from "@/public/roshanlogo.svg";
 import Theme from "./Theme";
 import MobileMenu from "./MobileMenu";
+import SignatureLogo from "./SignatureLogo";
 
 export default function Navbar() {
   const data = [
@@ -24,7 +23,7 @@ export default function Navbar() {
     <header className="text-sm py-6 md:px-16 px-6 border-b dark:border-zinc-800 border-zinc-200 z-30 md:mb-28 mb-10">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <Link href="/">
-          <Image src={Logo} width={40} height={40} alt="logo" />
+          <SignatureLogo />
         </Link>
 
         <nav className="md:block hidden">
