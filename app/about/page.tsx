@@ -33,8 +33,8 @@ export default function About() {
           <div className="order-2 lg:order-none">
             <Slide>
               <h1 className="font-headline font-bold tracking-tight sm:text-5xl text-3xl lg:leading-tight mb-8">
-                I&apos;m <span className="text-zinc-900 dark:text-white">{profile?.fullName ?? "John Doe"}</span>. I live in{" "}
-                <span className="text-zinc-900 dark:text-white">{profile?.location ?? "India"}</span>, where I build the future.
+                I&apos;m <span className="text-zinc-900 dark:text-white">{profile?.fullName ?? "John Doe"}</span>.{" "}
+                I build AI systems that solve real problems for real people.
               </h1>
 
               <div className="dark:text-zinc-400 text-zinc-600 leading-loose text-lg font-light">
@@ -63,7 +63,7 @@ export default function About() {
                       src={profile?.profileImage.image}
                       width={400}
                       height={400}
-                      quality={100}
+                      quality={95}
                       alt={profile?.profileImage.alt}
                       priority
                     />
@@ -104,6 +104,31 @@ export default function About() {
             </Slide>
           </aside>
         </section>
+        <Slide delay={0.12}>
+          <section className="mb-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+              {[
+                { value: "12+", label: "Projects Shipped" },
+                { value: "190K+", label: "Users Reached" },
+                { value: "6", label: "Companies" },
+                { value: "14B", label: "Largest Model Deployed" },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="text-center p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50"
+                >
+                  <div className="text-3xl sm:text-4xl font-bold font-headline bg-gradient-to-r from-zinc-900 via-zinc-600 to-zinc-900 dark:from-white dark:via-zinc-400 dark:to-white bg-clip-text text-transparent">
+                    {stat.value}
+                  </div>
+                  <div className="mt-2 text-sm text-zinc-500 dark:text-zinc-400 font-medium">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </Slide>
+
         <Slide delay={0.14}>
           <Usage />
         </Slide>

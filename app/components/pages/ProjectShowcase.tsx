@@ -150,7 +150,12 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
 
                                         {/* Title */}
                                         <h3 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-white mb-3 tracking-tight">
-                                            {project.name}
+                                            <Link
+                                                href={`/projects/${project.slug}`}
+                                                className="hover:text-violet-500 dark:hover:text-violet-400 transition-colors"
+                                            >
+                                                {project.name}
+                                            </Link>
                                         </h3>
 
                                         {/* Tagline */}

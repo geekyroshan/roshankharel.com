@@ -1,7 +1,7 @@
 import "@/app/styles/globals.css";
 import Script from "next/script";
 import type { Metadata } from "next";
-import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google"; // Import new fonts
+import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import Navbar from "./components/global/Navbar";
 import Footer from "./components/global/Footer";
 import { Providers } from "./providers";

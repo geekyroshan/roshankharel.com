@@ -17,7 +17,7 @@ export const profile = {
                 {
                     _key: "1",
                     _type: "span",
-                    text: "I am a passionate AI Engineer and Full Stack Developer with a deep focus on building intelligent systems. From architecting MLOps pipelines to deploying autonomous AI agents, I love solving complex problems with cutting-edge technology.",
+                    text: "I'm an AI Engineer and founder who builds intelligent systems that ship to production and serve real users. I specialize in the full lifecycle of AI -- from training and fine-tuning models to deploying them at scale with robust MLOps infrastructure. Whether it's an enterprise RAG pipeline with zero-hallucination guarantees or a 14-billion parameter avatar model running on a GPU cluster, I care about one thing: does it work for the people who use it?",
                     marks: [],
                 },
             ],
@@ -31,13 +31,55 @@ export const profile = {
                 {
                     _key: "1",
                     _type: "span",
-                    text: "Currently, I lead AI engineering at AlysAI and run my own automation agency, Sarathi Studio. My expertise spans across the entire stack - from React/Next.js frontends to PyTorch/TensorFlow models and Kubernetes deployments.",
+                    text: "My path to AI started in Web3. As a founding engineer at MagicSquare, I architected the technical backbone of a community platform and helped scale it from under 10,000 users to over 190,000. That experience taught me how to build systems that handle real-world traffic and messy user behavior -- lessons that transferred directly when I moved into machine learning and AI engineering.",
                     marks: [],
-                }
+                },
             ],
             markDefs: [],
-            style: "normal"
-        }
+            style: "normal",
+        },
+        {
+            _key: "3",
+            _type: "block",
+            children: [
+                {
+                    _key: "1",
+                    _type: "span",
+                    text: "Today, I lead AI engineering at AlysAI, a Dubai-based AI agency where I've shipped enterprise-grade projects including autonomous AI agents and LiveAvatar -- a real-time interactive avatar system powered by Alibaba's WanS2V-14B diffusion model, deployed across 5x H800 GPUs. In parallel, I founded Sarathi Studio, my own automation agency that builds AI-powered solutions for local businesses, helping them compete in a world increasingly shaped by intelligent software.",
+                    marks: [],
+                },
+            ],
+            markDefs: [],
+            style: "normal",
+        },
+        {
+            _key: "4",
+            _type: "block",
+            children: [
+                {
+                    _key: "1",
+                    _type: "span",
+                    text: "On the technical side, I work daily with PyTorch, Kubernetes, and the modern MLOps stack. I've built reinforcement learning pipelines that power production recommendation engines (Fundora), designed RAG architectures with 333+ passing tests and OWASP-compliant security (Aya KB), and trained RL agents that outperform baseline strategies by 80%. I'm comfortable across the entire stack -- React and Next.js on the frontend, FastAPI and distributed systems on the backend, and deep learning frameworks for everything in between.",
+                    marks: [],
+                },
+            ],
+            markDefs: [],
+            style: "normal",
+        },
+        {
+            _key: "5",
+            _type: "block",
+            children: [
+                {
+                    _key: "1",
+                    _type: "span",
+                    text: "What drives me most is making AI accessible to people and communities that are usually left behind. VisionSathi, my offline-first visual assistant, runs a 2B parameter model directly on mobile devices to help blind users navigate the world without needing internet access. Sarathi Voice Agent serves 31 million citizens in Northeast India by helping them navigate government services in their native languages -- Assamese, Bodo, Hindi, and English. I believe the most meaningful AI work happens not in research labs, but in the hands of the people who need it most.",
+                    marks: [],
+                },
+            ],
+            markDefs: [],
+            style: "normal",
+        },
     ],
     location: "India",
     resumeURL: "/resume.pdf", // Assumption, needs to be verified or updated

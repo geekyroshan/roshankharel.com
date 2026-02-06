@@ -42,6 +42,12 @@ export interface ProjectType {
         alt: string | null;
         lqip: string;
     };
+    techStack: string[];
+    metrics: string;
+    category: string;
+    highlights: string[];
+    fullDescription: string;
+    impact: string;
     description: any[];
 }
 
@@ -59,16 +65,26 @@ export interface PostType {
     };
     featured: boolean;
     isPublished: boolean;
+    body?: string;
+    readingTime?: string;
 }
 
 export interface TableValueProps {
+    caption?: string;
+    table?: {
+        rows: {
+            cells: string[];
+        }[];
+    };
     rows: {
         cells: string[];
     }[];
 }
 
 export interface QuizValueProps {
+    _key: string;
     question: string;
+    answer: string;
     options: string[];
     correctAnswer: number;
 }
