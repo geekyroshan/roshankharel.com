@@ -1,0 +1,67 @@
+{
+  "project": "roshankharel.com Portfolio",
+  "version": "2.0",
+  "lastUpdated": "2026-02-05",
+  "stories": [
+    {
+      "id": "PORTFOLIO-001",
+      "title": "Showcase AI/ML Projects with Impressive Presentations",
+      "status": "in_progress",
+      "priority": "high",
+      "description": "Update the portfolio projects section with recent work from Code and ML Projects directories. Each project should create a 'wow moment' for hirers with compelling taglines and clear impact metrics."
+    },
+    {
+      "id": "PORTFOLIO-002",
+      "title": "Add Project Detail Pages",
+      "status": "pending",
+      "priority": "medium",
+      "description": "Create individual project detail pages with full descriptions, tech stack, architecture diagrams, and demo links."
+    },
+    {
+      "id": "PORTFOLIO-003",
+      "title": "Add Case Studies Section",
+      "status": "pending",
+      "priority": "medium",
+      "description": "Add in-depth case studies for top 3 projects showing problem-solution-impact format."
+    },
+    {
+      "id": "PORTFOLIO-004",
+      "title": "Add Live Demos/Screenshots",
+      "status": "pending",
+      "priority": "low",
+      "description": "Add visual assets - screenshots, demo videos, or live embeds for each project."
+    }
+  ],
+  "projectsToShowcase": [
+    {
+      "name": "VisionSathi",
+      "category": "accessibility-ai",
+      "impact": "Offline-first AI assistant for blind users using on-device Moondream 3"
+    },
+    {
+      "name": "LiveAvatar",
+      "category": "generative-ai",
+      "impact": "14B parameter real-time avatar generation, 1000+ GitHub stars"
+    },
+    {
+      "name": "Aya Knowledge Base",
+      "category": "enterprise-rag",
+      "impact": "Zero-hallucination RAG system with 333+ tests, OWASP-compliant"
+    },
+    {
+      "name": "Sarathi Voice Agent",
+      "category": "conversational-ai",
+      "impact": "Multilingual govt voice assistant for NE India (Assamese/Bodo)"
+    },
+    {
+      "name": "UIDAI Analytics",
+      "category": "data-science",
+      "impact": "National-scale identity analytics platform for 1.4B citizens"
+    },
+    {
+      "name": "AI Portfolio Optimizer",
+      "category": "reinforcement-learning",
+      "impact": "PPO-based portfolio allocation achieving 84.6% CAGR"
+    }
+  ]
+}

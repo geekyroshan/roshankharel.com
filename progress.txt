@@ -1,0 +1,120 @@
+# Portfolio Progress Log
+# Append-only file tracking development progress
+
+## 2026-02-05 - Ralph Initialization
+- Initialized Ralph for portfolio project
+- Scanned 10+ projects from Code and ML Projects directories
+- Identified key projects for showcase:
+  * VisionSathi - Accessibility AI
+  * LiveAvatar - 14B generative avatar
+  * Aya KB - Enterprise RAG
+  * Sarathi Voice - Govt voice agent
+  * UIDAI Analytics - National identity analytics
+  * AI Portfolio Optimizer - RL for investments
+  * JobHunt Agent - LLM-powered outreach
+  * Resume Weaver - AI resume tailoring
+  * YouTube Recommender - Collaborative filtering
+  * MCP Lost & Found - Hackathon project
+
+## 2026-02-05 - Portfolio Projects Updated
+- Updated portfolio.ts with 12 impressive projects:
+  1. VisionSathi - Offline AI for blind users (On-device 2B Moondream)
+  2. LiveAvatar - 14B param avatar generation at 20 FPS (1000+ stars)
+  3. Aya Knowledge Base - Enterprise RAG with zero hallucinations (333+ tests)
+  4. Sarathi Voice Agent - Multilingual govt assistant (Assamese/Bodo)
+  5. Aadhaar Intelligence - National-scale analytics for 1.4B citizens
+  6. RL Portfolio Optimizer - 84.6% CAGR with PPO
+  7. Fundora RL Engine - Production startup-investor matching
+  8. JobHunt AI Agent - Autonomous founder outreach system
+  9. Resume Weaver - AI resume tailoring
+  10. YouTube RecSys - Collaborative filtering with BPR
+  11. MCP Lost & Found - Community tool for MCP hackathon
+  12. WhatsApp Market Monitor - Real-time message capture
+
+- Added techStack and metrics fields for each project
+- Crafted compelling taglines focused on impact and technical depth
+
+## 2026-02-06 - Professional Project Showcase Created
+- Created ProjectShowcase.tsx component with:
+  - Category filter buttons
+  - Full project cards with architecture diagrams
+  - Tech stack badges with color coding
+  - Expandable details with highlights and impact
+  - Professional dark theme matching portfolio aesthetic
+- Added stats bar showing: 12 Projects, 12 AI Categories, 40+ Technologies, 3 Production Systems
+- Each project now includes:
+  - Full description
+  - Key highlights (5 bullet points)
+  - Impact statement
+  - Category classification
+  - Tech stack badges
+  - Architecture diagram SVG
+  - Links to live demo and source code
+
+## Completed
+- Ralph initialized (prd.json, progress.txt)
+- 12 architecture SVG diagrams created
+- Portfolio data enriched with descriptions
+- ProjectShowcase component with expandable cards
+- Category filtering system
+- Stats bar at top of projects page
+
+## 2026-02-06 - UI Polish & Personal Branding
+- Fixed Footer: Removed "Built with" section, made it minimal and professional
+- Updated Homepage hero: Now prominently introduces "Roshan Kharel" with gradient text
+- Added "Hi, I'm" intro text + name in large gradient letters
+- Added subtitle "AI Engineer & Full Stack Developer"
+- Ensured font consistency: Added font-sans to body class in layout.tsx
+- Fixed typo in shortBio ("agentsw" -> "agents")
+- NeuralNetworkProjects now properly theme-aware (light/dark mode)
+- All SVG architecture diagrams verified working
+
+## 2026-02-06 - Hero Video Frame & Experience Redesign
+- Replaced HeroSvg with round video frame (gradient border)
+- Video frame shows GitHub profile image as fallback
+- When /wave.mp4 is added, it will autoplay (2-3 sec loop)
+- Frame has subtle glow effect with violet-pink-orange gradient
+- Size: 260px mobile, 300px desktop (similar to navbar height)
+- Redesigned Experience section:
+  - Header now says "My Journey" with gradient text
+  - Timeline has gradient line (violet to pink to orange)
+  - Selected job shows gradient text for company name
+  - Node dots use gradient when selected
+  - Detail panel has cleaner card design
+  - Job title highlighted in violet
+  - "Present" badge in emerald color
+  - Improved responsive layout
+
+## 2026-02-06 - Signature Logo
+- Replaced old PNG logo with stylish "geekyroshan" signature
+- Custom terminal/code icon with:
+  - Rounded square background (dark/light theme aware)
+  - Terminal prompt chevron (>)
+  - Cursor line in violet
+  - Blinking pink dot accent
+- "geeky" in solid color, "roshan" in gradient (violet→pink→orange)
+- Hover effect scales up the icon
+- Font: Space Grotesk (font-headline)
+
+## 2026-02-06 - UI Fixes
+- Added wave emoji (👋) after "Hi, I'm" with animation
+- Wave animation defined in tailwind.config.js (rotating hand effect)
+- Removed "GitHub Activity" heading - just the graph box now
+- Fixed GitHub section alignment with justify-center
+- Removed clickable functionality from neural network nodes
+
+## 2026-02-06 - Experience Section Redesign
+- Completely redesigned Experience/Journey section
+- Left panel: Job list in contained card with rounded corners
+- Selected job has white/dark background with shadow
+- Node dots: gradient when selected, gray when not
+- Smoother animation (y-axis instead of x-axis, 200ms)
+- Right panel: Detail card with better layout
+- Both panels same height with h-full
+- Cleaner visual hierarchy
+
+## Next Steps
+- Add screenshots/demo videos for visual projects
+- Create individual project detail pages with deeper content
+- Add blog posts for technical deep-dives
+- Add wave.mp4 video to /public for hero section

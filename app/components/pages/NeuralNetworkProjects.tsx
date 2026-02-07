@@ -20,6 +20,7 @@ export default function NeuralNetworkProjects({ projects }: { projects: Project[
     const [isDark, setIsDark] = useState(true);
     const [containerWidth, setContainerWidth] = useState(0);
     const [isTouchDevice, setIsTouchDevice] = useState(false);
+    const [isReady, setIsReady] = useState(false);
     const animationRef = useRef<number | undefined>(undefined);
     const nodesRef = useRef<{ x: number; y: number; vx: number; vy: number; project: Project }[]>([]);
     const prevWidthRef = useRef(0);
@@ -46,7 +47,9 @@ export default function NeuralNetworkProjects({ projects }: { projects: Project[
         if (!container) return;
 
         const updateWidth = () => {
-            setContainerWidth(container.getBoundingClientRect().width);
+            const w = container.getBoundingClientRect().width;
+            setContainerWidth(w);
+            if (w > 0) setIsReady(true);
         };
         updateWidth();
 
@@ -99,16 +102,18 @@ export default function NeuralNetworkProjects({ projects }: { projects: Project[
         const container = containerRef.current;
         if (!canvas || !container) return;
 
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext("2d", { willReadFrequently: false });
         if (!ctx) return;
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap at 2x for performance
 
         const resizeCanvas = () => {
             const rect = container.getBoundingClientRect();
-            canvas.width = rect.width * window.devicePixelRatio;
-            canvas.height = rect.height * window.devicePixelRatio;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
             canvas.style.width = `${rect.width}px`;
             canvas.style.height = `${rect.height}px`;
-            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         };
 
         resizeCanvas();
@@ -334,6 +339,15 @@ export default function NeuralNetworkProjects({ projects }: { projects: Project[
             setHoveredProject(null);
         }
     };
+
+    // Show nothing until container width is measured
+    if (!isReady) {
+        return (
+            <div className="relative mb-12">
+                <div className="h-[250px] md:h-[350px] rounded-2xl overflow-hidden bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 animate-pulse" />
+            </div>
+        );
+    }
 
     // Fallback simple project list for very small screens
     if (isSmallScreen) {
