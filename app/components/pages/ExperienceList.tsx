@@ -12,42 +12,50 @@ export default function ExperienceList({ jobs }: { jobs: JobType[] }) {
     return (
         <div className="grid lg:grid-cols-12 grid-cols-1 gap-6 lg:gap-8">
             {/* Left: Interactive List */}
-            <div className="lg:col-span-5 relative">
-                <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-2">
-                    {/* Gradient vertical line */}
-                    <div className="absolute left-[22px] top-8 bottom-8 w-[2px] bg-gradient-to-b from-violet-500 via-pink-500 to-orange-500 hidden lg:block opacity-40" />
-
-                    {jobs.map((job) => {
+            <div className="lg:col-span-5">
+                <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-3">
+                    {jobs.map((job, index) => {
                         const isSelected = selectedJob === job._id;
+                        const isLast = index === jobs.length - 1;
                         return (
-                            <div
-                                key={job._id}
-                                className={`relative z-10 pl-10 py-4 px-4 cursor-pointer rounded-xl transition-all duration-200 ${
-                                    isSelected
-                                        ? "bg-white dark:bg-zinc-800 shadow-sm"
-                                        : "hover:bg-white/50 dark:hover:bg-zinc-800/50"
-                                }`}
-                                onClick={() => setSelectedJob(job._id)}
-                            >
-                                {/* Node Dot */}
-                                <div
-                                    className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full transition-all duration-200 ${
-                                        isSelected
-                                            ? "bg-gradient-to-r from-violet-500 to-pink-500 shadow-md shadow-violet-500/40"
-                                            : "bg-zinc-300 dark:bg-zinc-600"
-                                    }`}
-                                />
+                            <div key={job._id} className="relative">
+                                {/* Connecting line between dots */}
+                                {!isLast && (
+                                    <div className="absolute left-[19px] top-[36px] bottom-0 w-[2px] bg-zinc-200 dark:bg-zinc-700" />
+                                )}
 
-                                <h3 className={`text-base font-semibold font-headline transition-colors ${
-                                    isSelected
-                                        ? "text-zinc-900 dark:text-white"
-                                        : "text-zinc-500 dark:text-zinc-400"
-                                }`}>
-                                    {job.name}
-                                </h3>
-                                <p className="text-sm text-zinc-400 dark:text-zinc-500">
-                                    {job.jobTitle}
-                                </p>
+                                <div
+                                    className={`relative z-10 flex items-start gap-4 py-4 px-3 cursor-pointer rounded-xl transition-all duration-200 ${
+                                        isSelected
+                                            ? "bg-white dark:bg-zinc-800 shadow-sm"
+                                            : "hover:bg-white/50 dark:hover:bg-zinc-800/50"
+                                    }`}
+                                    onClick={() => setSelectedJob(job._id)}
+                                >
+                                    {/* Node Dot */}
+                                    <div className="flex-shrink-0 mt-1">
+                                        <div
+                                            className={`w-[10px] h-[10px] rounded-full transition-all duration-200 ring-4 ${
+                                                isSelected
+                                                    ? "bg-violet-500 ring-violet-500/20"
+                                                    : "bg-zinc-300 dark:bg-zinc-600 ring-zinc-100 dark:ring-zinc-900"
+                                            }`}
+                                        />
+                                    </div>
+
+                                    <div className="min-w-0">
+                                        <h3 className={`text-sm font-semibold font-headline transition-colors ${
+                                            isSelected
+                                                ? "text-zinc-900 dark:text-white"
+                                                : "text-zinc-500 dark:text-zinc-400"
+                                        }`}>
+                                            {job.name}
+                                        </h3>
+                                        <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                                            {job.jobTitle}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         );
                     })}
@@ -106,7 +114,7 @@ export default function ExperienceList({ jobs }: { jobs: JobType[] }) {
                                 </div>
                             </div>
 
-                            <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans">
+                            <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans text-[0.95rem]">
                                 {currentJob.description}
                             </p>
                         </motion.div>

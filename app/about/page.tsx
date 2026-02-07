@@ -177,7 +177,7 @@ export default function About() {
                   key={stat.label}
                   className="text-center p-5 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50"
                 >
-                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-headline bg-gradient-to-r from-violet-500 via-pink-500 to-orange-500 bg-clip-text text-transparent">
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-headline text-zinc-900 dark:text-white">
                     {stat.value}
                   </div>
                   <div className="mt-1.5 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-medium">

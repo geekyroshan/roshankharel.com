@@ -340,17 +340,8 @@ export default function NeuralNetworkProjects({ projects }: { projects: Project[
         }
     };
 
-    // Show nothing until container width is measured
-    if (!isReady) {
-        return (
-            <div className="relative mb-12">
-                <div className="h-[250px] md:h-[350px] rounded-2xl overflow-hidden bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 animate-pulse" />
-            </div>
-        );
-    }
-
     // Fallback simple project list for very small screens
-    if (isSmallScreen) {
+    if (isReady && isSmallScreen) {
         return (
             <div className="relative mb-12">
                 <div className="rounded-2xl overflow-hidden bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 p-4">
@@ -401,6 +392,9 @@ export default function NeuralNetworkProjects({ projects }: { projects: Project[
                     // Keep tooltip visible on touch end (dismiss by tapping elsewhere)
                 }}
             >
+                {!isReady && (
+                    <div className="absolute inset-0 animate-pulse bg-zinc-100 dark:bg-zinc-900" />
+                )}
                 <canvas ref={canvasRef} className="absolute inset-0" />
 
                 {/* Hover/Touch tooltip with clamped positioning */}
